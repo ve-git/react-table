@@ -11,8 +11,7 @@ export default class Table extends Component {
   }
   
   render() {
-    const { data } = this.props.tableData;
-    const { caption } = this.props.tableData;
+    const { data, caption } = this.props.tableData;
     let rows = data.map((item, index) => {
       return (
         <Row key={index} data={item} />
