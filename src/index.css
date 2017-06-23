@@ -3,3 +3,7 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+th, td, table {
+  border: 1px solid #000;
+ }

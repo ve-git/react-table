@@ -6,6 +6,7 @@ export default class Col extends Component {
     data: PropTypes.string.isRequired
   };
   
+  
   render() {
     const { data } = this.props;
     return (

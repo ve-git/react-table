@@ -24,6 +24,6 @@ export default class TableBody extends Component {
         {colNamesPlaceHolder}  
         {rows}
       </tbody>
-    );  
+    );
   };
 };
