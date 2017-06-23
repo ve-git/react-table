@@ -1,28 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Row from './row';
+import TableCaption from './table-caption';
+import TableBody from './table-body';
 
 export default class Table extends Component {
   static propTypes = {
-    tableData: PropTypes.shape({
+    data: PropTypes.shape({
       caption: PropTypes.string,  
-      data: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired
+      colNames: PropTypes.arrayOf(PropTypes.string),
+      cells: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired
     }).isRequired
   }
   
   render() {
-    const { data, caption } = this.props.tableData;
-    let rows = data.map((item, index) => {
-      return (
-        <Row key={index} data={item} />
-      );
-    });
+    const { caption, colNames, cells } = this.props.data;
+    const bodyData = {colNames: colNames, cells: cells}; // TODO поискать другой способ
+    const TableCaptionPlaceholder = caption? <TableCaption data={caption} />: null;
     return (
       <table>
-        {caption? <caption>{caption}</caption>: null}
-        <tbody>
-          {rows}
-        </tbody>
+        {TableCaptionPlaceholder}
+        <TableBody data={bodyData}/>
       </table>
     );  
   };
