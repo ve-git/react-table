@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Col from './col';
+import Col from './Col';
 
 export default class Row extends Component {
   static propTypes = {
@@ -9,11 +9,10 @@ export default class Row extends Component {
 
   render() {
     const { data } = this.props;
-    let cols = data.map((item, index) => {
-      return (
-        <Col key={index} data={item} /> 
-      );
-    });
+    let cols = data.map(
+      (item, index) => <Col key={index} data={item} /> 
+    );
+    
     return (
       <tr>
         {cols}

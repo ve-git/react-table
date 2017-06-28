@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TableCaption from './table-caption';
-import TableBody from './table-body';
+import TableCaption from './TableCaption';
+import TableBody from './TableBody';
+import TableHead from './TableHead';
+
 
 export default class Table extends Component {
+
   static propTypes = {
     data: PropTypes.shape({
       caption: PropTypes.string,  
@@ -14,12 +17,14 @@ export default class Table extends Component {
   
   render() {
     const { caption, colNames, cells } = this.props.data;
-    const bodyData = {colNames: colNames, cells: cells}; // TODO поискать другой способ
-    const TableCaptionPlaceholder = caption? <TableCaption data={caption} />: null;
+    const tableCaptionPlaceholder = caption? <TableCaption data={caption} />: null;
+    const tableHeadPlaceholder = (colNames.length)? <TableHead data={colNames} /> : null; 
+
     return (
       <table>
-        {TableCaptionPlaceholder}
-        <TableBody data={bodyData}/>
+        {tableCaptionPlaceholder}
+        {tableHeadPlaceholder}
+        <TableBody data={cells}/>
       </table>
     );  
   };

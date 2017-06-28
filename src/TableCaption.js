@@ -7,6 +7,7 @@ export default class TableCaption extends Component {
   }
   render() {
     const { data } = this.props;
+    
     return (
       <caption>{data}</caption>
     );

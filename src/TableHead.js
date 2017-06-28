@@ -5,16 +5,18 @@ export default class TableBody extends Component {
   static propTypes = {
     data: PropTypes.arrayOf(PropTypes.string)
   }
-  
+
   render() {
     const { data } = this.props;
-    let colNames = data.map((item, index) => {
-      return (
-        <th key={index}>{item}</th>
-      );
-    });
+    let colNames = data.map(
+      (item, index) => <th key={index}>{item}</th>
+    );
+
     return (
-      <tr>{colNames}</tr>
+      <thead>
+        <tr>{colNames}</tr>
+      </thead>
     );  
   };
+
 };

@@ -5,10 +5,10 @@ export default class Col extends Component {
   static propTypes = {
     data: PropTypes.string.isRequired
   };
-  
-  
+
   render() {
     const { data } = this.props;
+
     return (
       <td> 
         {data} 
