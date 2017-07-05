@@ -1,9 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import './index.css';
+import App from './containers/App';
+//import registerServiceWorker from './registerServiceWorker';
+//import './styles/index.css';
+//import './styles/app.css';           // <-- импорт стилей
+import './styles/index.css';           // <-- импорт стилей
+import { Provider } from 'react-redux';
+import configureStore from './store/configureStore';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = configureStore();
 
-registerServiceWorker();
+
+ReactDOM.render(
+  <Provider store={store}>
+    <div className='app'> {/* обернули все в .app */}
+      <App />
+    </div>
+  </Provider>,
+  document.getElementById('root')
+);
+
+//registerServiceWorker();

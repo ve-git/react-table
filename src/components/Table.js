@@ -18,7 +18,7 @@ export default class Table extends Component {
   render() {
     const { caption, colNames, cells } = this.props.data;
     const tableCaptionPlaceholder = caption? <TableCaption data={caption} />: null;
-    const tableHeadPlaceholder = (colNames.length)? <TableHead data={colNames} /> : null; 
+    const tableHeadPlaceholder = (colNames.length)? <TableHead data={colNames} setColWidth={this.props.setColWidth} /> : null; 
 
     return (
       <table>
