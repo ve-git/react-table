@@ -16,7 +16,8 @@ export default class Table extends Component {
     colsElementInit: PropTypes.func.isRequired,
     colsMouseMove: PropTypes.func.isRequired,
     colsMouseDown: PropTypes.func.isRequired,
-    colsMouseUp: PropTypes.func.isRequired
+    colsMouseUp: PropTypes.func.isRequired,
+    colsMouseOut: PropTypes.func.isRequired
   }
 
   render() {
@@ -26,18 +27,16 @@ export default class Table extends Component {
       <TableHead 
         data={colNames} 
         colsElementInit={this.props.colsElementInit} 
-        colsMouseMove={this.props.colsMouseMove}
-        colsMouseDown={this.props.colsMouseDown}
-        colsMouseUp={this.props.colsMouseUp}
       /> 
       : null; 
 
+    /* Наверное, можно и так! Я про onMouseOut ниже по тексту*/
+    // onMouseOut={this.props.colsMouseUp}
     return (
       <table
         onMouseMove={this.props.colsMouseMove}
         onMouseDown={this.props.colsMouseDown}
         onMouseUp={this.props.colsMouseUp}
-      
       >
         {tableCaptionPlaceholder}
         {tableHeadPlaceholder}

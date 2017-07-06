@@ -57,7 +57,7 @@ export function colsMouseMove(event) {
       let newActiveColNum = -1;
       
       for (let i=0; i<colsCount; ++i){
-        if (Math.abs(x - cols.colRight[i]) < 10) {
+        if (Math.abs(x - cols.colRight[i]) < 20) {
           found = true;
           newActiveColNum = i;  
           newChangingState = 1;
@@ -111,14 +111,17 @@ export function colsMouseDown(event) {
 }    
 
 export function colsMouseUp(event) {
-console.log('colsMouseUp Пробую зайти!');   
   return function (dispatch, getState) {
     //event.preventDefault;
     const { cols } = getState(); 
+console.log('colsMouseUp Зашел! cols.changingState='+ cols.changingState);   
     
     if (cols.changingState !== 2) return;
    
     //курсор находится у правой границы, так что изменения не требуется
+    //но все равно изменим!
+    cols.elements[0].parentNode.parentNode.parentNode.style.cursor='auto';
+
     const parentNode = cols.elements[0].parentNode;
     const headCoords = {
       left: parentNode.offsetLeft,
@@ -139,6 +142,41 @@ console.log('colsMouseUp Пробую зайти!');
       colRight
     });
     //colsMouseMove(event);
+  };
+}    
+
+export function colsMouseOut(event) {
+  return function (dispatch, getState) {
+    //event.preventDefault;
+    const { cols } = getState(); 
+console.log('colsMouseOut Зашел! cols.changingState='+ cols.changingState);   
+    
+    
+    if (cols.changingState !== 2) return;
+   
+    //курсор находится у правой границы, так что изменения не требуется
+    //но все равно изменим!
+    cols.elements[0].parentNode.parentNode.parentNode.style.cursor='auto';
+    const parentNode = cols.elements[0].parentNode;
+    const headCoords = {
+      left: parentNode.offsetLeft,
+      top: parentNode.offsetTop,
+      width: parentNode.offsetWidth,
+      height: parentNode.offsetHeight
+    };
+
+    let colRight = [];
+    for (let i=1; i<colsCount; ++i){
+      colRight[i-1] = cols.elements[i].offsetLeft;
+    }
+    colRight[colsCount-1] = headCoords.left + headCoords.width;
+
+    dispatch({ 
+      type: COLS_MOUSEOUT,
+      headCoords,
+      colRight
+    });
+
   };
 }    
 

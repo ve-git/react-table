@@ -17,6 +17,7 @@ class App extends Component {
     this.colsMouseMove = this.props.colsActions.colsMouseMove.bind(this);
     this.colsMouseDown = this.props.colsActions.colsMouseDown.bind(this);
     this.colsMouseUp = this.props.colsActions.colsMouseUp.bind(this);
+    this.colsMouseOut = this.props.colsActions.colsMouseOut.bind(this);
     //this.state = {colElements:[]};
   }
 
@@ -65,6 +66,7 @@ class App extends Component {
         colsMouseMove={this.colsMouseMove}
         colsMouseDown={this.colsMouseDown}
         colsMouseUp={this.colsMouseUp}
+        colsMouseOut={this.colsMouseOut}
       />);}
   };
 };

@@ -14,6 +14,7 @@ const initialState = {
 };
 
 export default function cols(state = initialState, action) {
+  console.log('action.type = ' + action.type);
   switch (action.type) {
   case COLS_ELEMENT_INIT: {
     let elements = state.elements.slice();
@@ -33,7 +34,11 @@ export default function cols(state = initialState, action) {
     return { ...state, changingState: 2, savedWidth:action.savedWidth};
   }
   case COLS_MOUSEUP: {
-    return { ...state, changingState: 1, headCoords: action.headCoords, colRight: action.colRight};
+    return { ...state, changingState: 0, headCoords: action.headCoords, colRight: action.colRight};
+  }
+  case COLS_MOUSEOUT: {
+    console.log(COLS_MOUSEOUT);
+    return { ...state, changingState: 0, headCoords: action.headCoords, colRight: action.colRight};
   }
 
   default:
