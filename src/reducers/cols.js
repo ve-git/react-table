@@ -1,7 +1,43 @@
+import {COLS_ELEMENT_INIT, COLS_INIT_STARTED, COLS_INIT_FINISHED, 
+  COLS_MOUSEMOVE,
+  COLS_MOUSEDOWN, 
+  COLS_MOUSEUP, COLS_MOUSEOUT, COLS_MOUSEOVER} from '../constants/Cols';
+
 const initialState = {
-  colWidth: [0,0,0,0]
+  elements: [],
+  colRight: [],
+  headCoords: {left:0, top:0, width:0, height:0},
+  activeColNum: -1,  
+  changingState: -2, // 0 - none (colsInit finished), 1 - ready, 2 - is changing, 
+                     //-2 - initial, -1 - colsInit started
+  savedWidth: 0  // width of active column before changing
 };
 
-export default function cols(state = initialState) {
-  return state;
+export default function cols(state = initialState, action) {
+  switch (action.type) {
+  case COLS_ELEMENT_INIT: {
+    let elements = state.elements.slice();
+    elements[action.num] = action.element;
+    return { ...state, elements };
+  }
+  case COLS_INIT_STARTED: {
+    return { ...state, changingState: -1};
+  }
+  case COLS_INIT_FINISHED: {
+    return { ...state, colRight: action.colRight, headCoords: action.headCoords, changingState: 0, };
+  }
+  case COLS_MOUSEMOVE: {
+    return { ...state, activeColNum: action.activeColNum, changingState: action.changingState};
+  }
+  case COLS_MOUSEDOWN: {
+    return { ...state, changingState: 2, savedWidth:action.savedWidth};
+  }
+  case COLS_MOUSEUP: {
+    return { ...state, changingState: 1, headCoords: action.headCoords, colRight: action.colRight};
+  }
+
+  default:
+    return state;
+  }
 }
+

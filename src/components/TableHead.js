@@ -5,35 +5,50 @@ export default class TableHead extends Component {
   constructor(props){
     super(props);
     this.cols = [];
-    this.setColWidth = this.setColWidth.bind(this);
-    this.mouseMove = this.mouseMove.bind(this);
+    this.colsElementInit = this.props.colsElementInit.bind(this);
+    this.myFunction = this.myFunction.bind(this);
   }
 
-  setColWidth(elem, index) {
-    this.props.setColWidth(elem, index);
-  } 
-
-  mouseMove(e) {
-    console.log(e.clientX+':'+e.clientY);
-  } 
-
+  myFunction(event){
+    console.log('Вызвано!');
+  };
 
   static propTypes = {
-    data: PropTypes.arrayOf(PropTypes.string)
+    data: PropTypes.arrayOf(PropTypes.string),
+    colsElementInit: PropTypes.func.isRequired,
+    colsMouseMove: PropTypes.func.isRequired,
+    colsMouseDown: PropTypes.func.isRequired,
+    colsMouseUp: PropTypes.func.isRequired,
+    
   }
 
   render() {
     console.log('renderTableHead');
     const { data } = this.props;
     let colNames = data.map(
-      (item, index) => <th key={index} ref={(elem) => {this.setColWidth(elem, index);}} >{item}</th>
-//      (item, index) => <th key={index} ref={(elem) => {;}} >{item}</th>
-      
+      (item, index) => 
+        <th 
+          key={index} 
+          ref={(elem) => {this.colsElementInit(elem, index);}} 
+        >
+          {item}
+        </th>
     );
 
+/*
+        onMouseMove={this.props.colsMouseMove}
+        onMouseDown={this.props.colsMouseDown}
+        onMouseUp={this.props.colsMouseUp}
+
+*/
+
     return (
-      <thead onMouseMove={this.mouseMove}>
-        <tr>{colNames}</tr>
+      <thead 
+      >
+        <tr
+        >
+          {colNames}
+        </tr>
       </thead>
     );  
   };
