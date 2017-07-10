@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Table from '../components/Table';
+import Wrapper from '../components/Wrapper';
 import * as TableActions from '../actions/TableActions';
 import * as ColsActions from '../actions/ColsActions';
+//import {colsMouseMove} from '../actions/ColsActions';
 //import {colsCount} from '../components/setup';
 
 class App extends Component {
@@ -12,34 +13,20 @@ class App extends Component {
     const { loadTable } = this.props.tableActions;
     this.loadTable = loadTable.bind(this);
 
+console.log('this.props.store');
+console.log(this.props.store);
+
     //this.setColWidth = this.setColWidth.bind(this);
     this.colsElementInit = this.props.colsActions.colsElementInit.bind(this);
+    //this.colsMouseMove = this.props.colsActions.colsMouseMove.bind(this, this.props.store);
+    //this.colsMouseMove = colsMouseMove.bind(this, this.props.store);
     this.colsMouseMove = this.props.colsActions.colsMouseMove.bind(this);
     this.colsMouseDown = this.props.colsActions.colsMouseDown.bind(this);
     this.colsMouseUp = this.props.colsActions.colsMouseUp.bind(this);
+    //this.colsMouseOut = this.props.colsActions.colsMouseOut.bind(this, this.props.store);
     this.colsMouseOut = this.props.colsActions.colsMouseOut.bind(this);
     //this.state = {colElements:[]};
   }
-
-// функция должна устанавливать щирину ячеек, 
-/*
-  setColWidth(elem, colNum){
-    if (!elem) return;
-    elem.style.backgroundColor = 'red';
-    this.colsElementInit(elem, colNum);
-    if (colNum === colsCount){
-
-    }
-    console.log('colNum='+colNum);
-    elem.style.backgroundColor = 'red';
-    if (colNum < 2){
-      elem.width = 300;
-    } else {
-      elem.width = 0;
-    }
-    console.log('elem.offsetWidth =' + elem.offsetWidth);
-  }
-*/
 
   componentDidUpdate(prevProps, prevState){
     console.log('App.componentDidUpdate');
@@ -60,13 +47,14 @@ class App extends Component {
     else if (data.error){ return (<div> {data.error}</div>); } 
     else if (!data.cells) { return false; }  
     else { return (
-      <Table 
+      <Wrapper
         data={data} 
         colsElementInit={this.colsElementInit}
         colsMouseMove={this.colsMouseMove}
         colsMouseDown={this.colsMouseDown}
         colsMouseUp={this.colsMouseUp}
         colsMouseOut={this.colsMouseOut}
+        colsMouseOver={this.colsMouseOver}
       />);}
   };
 };

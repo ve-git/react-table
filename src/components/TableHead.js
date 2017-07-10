@@ -6,6 +6,8 @@ export default class TableHead extends Component {
     super(props);
     this.cols = [];
     this.colsElementInit = this.props.colsElementInit.bind(this);
+    console.log('this.colsElementInit');
+    console.log(this.colsElementInit);
   }
 
 
