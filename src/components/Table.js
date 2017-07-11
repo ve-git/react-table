@@ -12,8 +12,7 @@ export default class Table extends Component {
       caption: PropTypes.string,  
       colNames: PropTypes.arrayOf(PropTypes.string),
       cells: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired
-    }).isRequired,
-    colsElementInit: PropTypes.func.isRequired
+    }).isRequired
   }
 
   render() {
@@ -24,7 +23,6 @@ export default class Table extends Component {
     const tableHeadPlaceholder = (colNames.length)? 
       <TableHead 
         data={colNames} 
-        colsElementInit={this.props.colsElementInit} 
       /> 
       : null; 
 

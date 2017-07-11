@@ -24,7 +24,7 @@ export default class Wrapper extends Component {
     this.colsMouseDown = this.colsMouseDown.bind(this);
     this.colsMouseUp = this.colsMouseUp.bind(this);
     this.colsMouseOut = this.colsMouseOut.bind(this);
-    
+    this.setAddress = this.setAddress.bind(this);
   }  
 
   static propTypes = {
@@ -148,6 +148,17 @@ export default class Wrapper extends Component {
     this.recalcState(colParams);
   }    
 
+  setAddress(elem){
+    this.address = elem;
+  }
+
+  componentDidMount(){
+    console.log('componentDidMount');
+    //                 /div    /table     /thead       /tr
+    let element = this.address.children[0].children[1].children[0];
+    this.colsElementInit(element);
+  }
+
   shouldComponentUpdate(nextProps, nextState){
     return false;
   }
@@ -157,15 +168,16 @@ export default class Wrapper extends Component {
       
     const data = this.props.data;
     return (
-      <div id='wrapper'
+      <div 
+        id='wrapper'
         onMouseMove={this.colsMouseMove}
         onMouseDown={this.colsMouseDown}
         onMouseUp={this.colsMouseUp}
         onMouseOut={this.colsMouseOut}
+        ref={(elem) => {this.setAddress(elem);}}
       >  
         <Table
           data={data} 
-          colsElementInit={this.colsElementInit}
         />
       </div>  
     );

@@ -5,15 +5,10 @@ export default class TableHead extends Component {
   constructor(props){
     super(props);
     this.cols = [];
-    this.colsElementInit = this.props.colsElementInit.bind(this);
-    console.log('this.colsElementInit');
-    console.log(this.colsElementInit);
   }
 
-
   static propTypes = {
-    data: PropTypes.arrayOf(PropTypes.string),
-    colsElementInit: PropTypes.func.isRequired
+    data: PropTypes.arrayOf(PropTypes.string)
   }
 
   render() {
@@ -28,10 +23,9 @@ export default class TableHead extends Component {
         </th>
     );
 
-
     return (
       <thead>
-        <tr ref={(elem) => {this.colsElementInit(elem);}}>
+        <tr>
           {colNames}
         </tr>
       </thead>
