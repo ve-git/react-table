@@ -16,14 +16,11 @@ export default class Wrapper extends Component {
                          //-1 - initial
       savedWidth: 0  // width of active column before changing
     };
-    this.colsElementInit = this.colsElementInit.bind(this);
     this.colsMouseMove = this.colsMouseMove.bind(this);
     this.colsMouseDown = this.colsMouseDown.bind(this);
     this.colsMouseUp = this.colsMouseUp.bind(this);
     this.colsMouseOut = this.colsMouseOut.bind(this);
     this.setAddress = this.setAddress.bind(this);
-    this.recalcColRight = this.recalcColRight.bind(this);
-    this.recalcState = this.recalcState.bind(this);
   }  
 
   static propTypes = {
@@ -38,7 +35,7 @@ export default class Wrapper extends Component {
     this.colsElementInit();
   }
 
-  recalcColRight(){
+  recalcState(){
     let params =  this.params;
     let elTr = params.elTable.children[1].children[0]; // /table/thead/tr      
     for(let i=0; i<elTr.children.length; i++) {
@@ -49,14 +46,15 @@ export default class Wrapper extends Component {
       params.colRight[i-1] = params.elements[i].offsetLeft;
     }
     params.colRight[colsCount-1] = elTr.offsetLeft + elTr.offsetWidth;
+    params.elTable.style.cursor='auto';
+    params.changingState = 0;
   }
 
   colsElementInit() {
     let params =  this.params;
     params.elTable = this.address.children[0]; // /div/table
     params.bottom = params.elTable.offsetTop + params.elTable.offsetHeight;
-    this.recalcColRight();
-    params.changingState = 0;
+    this.recalcState();
   };
 
   colsMouseMove(event) {
@@ -106,13 +104,6 @@ export default class Wrapper extends Component {
     params.changingState = 2;
   }
 
-  recalcState(){
-    let params =  this.params;
-    params.elTable.style.cursor='auto';
-    this.recalcColRight();
-    params.changingState = 0;
-  }
-
   colsMouseUp(event) {
     event.preventDefault();
     if (this.params.changingState !== 2) return;
@@ -131,7 +122,6 @@ export default class Wrapper extends Component {
   }
  
   render() {
-    console.log('render Wrapper');
     const data = this.props.data;
     return (
       <div 

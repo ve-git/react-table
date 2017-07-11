@@ -12,7 +12,6 @@ export default class TableHead extends Component {
   }
 
   render() {
-    console.log('renderTableHead');
     const { data } = this.props;
     let colNames = data.map(
       (item, index) => 
