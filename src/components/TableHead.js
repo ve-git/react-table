@@ -23,7 +23,6 @@ export default class TableHead extends Component {
       (item, index) => 
         <th 
           key={index} 
-          ref={(elem) => {this.colsElementInit(elem, index);}} 
         >
           {item}
         </th>
@@ -32,7 +31,7 @@ export default class TableHead extends Component {
 
     return (
       <thead>
-        <tr>
+        <tr ref={(elem) => {this.colsElementInit(elem);}}>
           {colNames}
         </tr>
       </thead>

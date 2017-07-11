@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './containers/App';
-//import registerServiceWorker from './registerServiceWorker';
-//import './styles/app.css';           // <-- импорт стилей
 import './styles/index.css';           // <-- импорт стилей
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
