@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Wrapper from '../components/Wrapper';
 import * as TableActions from '../actions/TableActions';
 
-class App extends Component {
+class CustomTable extends Component {
   constructor(props){
     super(props);
     const { loadTable } = this.props.tableActions;
@@ -23,12 +23,6 @@ class App extends Component {
     else { return (
       <Wrapper
         data={data} 
-        colsElementInit={this.colsElementInit}
-        colsMouseMove={this.colsMouseMove}
-        colsMouseDown={this.colsMouseDown}
-        colsMouseUp={this.colsMouseUp}
-        colsMouseOut={this.colsMouseOut}
-        colsMouseOver={this.colsMouseOver}
       />);}
   };
 };
@@ -45,6 +39,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(CustomTable);

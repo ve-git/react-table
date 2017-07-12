@@ -112,7 +112,7 @@ export default class Wrapper extends Component {
 
   colsMouseOut(event) {
     const y = event.pageY;
-    if (y < this.params.bottom) return;  //Некорректный вызов события
+    if ((y < this.params.bottom) && (y > this.params.elTable.offsetTop)) return;  //Некорректный вызов события
     if (this.params.changingState !== 2) return;
     this.recalcState();
   }    
